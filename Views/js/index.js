@@ -2,6 +2,9 @@ $(document).ready(function() {
     loadData();
 });
 
+/**
+ * Envía una solicitud AJAX para cargar datos y actualizar la interfaz.
+ * */
 function loadData() {
 
     $.ajax({
@@ -24,18 +27,27 @@ function loadData() {
     });
 }
 
+/**
+ * Envía a la vista los datos procesados.
+ * */
 function fillTableWithContent(data) {
 
     const tbodyRef = document.getElementById('paymentsInfo').getElementsByTagName('tbody')[0];
     iterateData(data, tbodyRef);
 }
 
+/**
+ * Envía a la vista la información resumida a partir de los datos procesados.
+ * */
 function displayAdditionalInformation(data) {
 
     const tfooterRef = document.getElementById('paymentsInfo').getElementsByTagName('tfoot')[0];
     iterateData(data, tfooterRef);
 }
 
+/**
+ * Genera filas y columnas para la tabla de la vista basándose en el objeto de datos procesados.
+ * */
 function iterateData(data, element) {
 
     data.forEach(function(info) {
