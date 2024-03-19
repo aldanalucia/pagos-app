@@ -15,7 +15,7 @@ function loadData() {
             } else {
                 fillTableWithContent(response.data);
                 displayAdditionalInformation(response.info);
-                $('#paymentsInfo').css('display', 'block');
+                $('#paymentsInfo').removeClass('d-none');
             }
         },
         error: function(xhr, status, error) {
