@@ -7,6 +7,7 @@ $(document).ready(function() {
  * */
 function loadData() {
 
+    $('.alert').text('Cargando datos...');
     $.ajax({
         type: "POST",
         url: "index_ajax.php",
@@ -14,15 +15,16 @@ function loadData() {
         success: function (response) {
 
             if (response.error) {
-                alert(response.error);
+                $('.alert').text(response.error);
             } else {
                 fillTableWithContent(response.data);
                 displayAdditionalInformation(response.info);
                 $('#paymentsInfo').removeClass('d-none');
+                $('.alert').addClass('d-none');
             }
         },
         error: function(xhr, status, error) {
-            alert("Error en la solicitud: " + error);
+            $('.alert').text(error);
         }
     });
 }

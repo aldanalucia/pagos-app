@@ -1,16 +1,29 @@
 <?php
 
-function parseStringToFloat(string $number): float {
+/**
+ * @param string $number
+ * @return int
+ */
+function parseStringToNumber(string $number): int{
 
-    return floatval(str_replace([' ', ','], '', $number));
+    return intval(str_replace(array('.', ','), '', $number));
 }
 
-function parseFloatToString(string $number): string {
+/**
+ * @param string $number
+ * @return string
+ */
+function parseNumberToString(string $number): string {
 
-    return number_format($number, 2, ',', '.');
+    $number = (float)$number;
+    return number_format($number / 100, 2, ',', '.');
 }
 
-function convertDateFromString($date) {
+/**
+ * @param string $date
+ * @return string
+ */
+function convertDateFromString(string $date): string {
 
     return date('d-m-Y', strtotime($date));
 }

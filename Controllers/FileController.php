@@ -81,14 +81,12 @@ class FileController {
      */
     public function getTotalAmount(array $data): string {
 
-        # TODO: revisar cálculo
         $totalAmount = 0;
-
         foreach ($data as $resultData) {
-            $totalAmount += parseStringToFloat($resultData['monto']);
+            $totalAmount += parseStringToNumber($resultData['monto']);
         }
 
-        return parseFloatToString($totalAmount);
+        return parseNumberToString($totalAmount);
     }
 
     /**
@@ -108,13 +106,12 @@ class FileController {
                 $totalTax[$resultData['medio_de_pago']]['amount'] = 0;
                 $totalTax[$resultData['medio_de_pago']]['count']  = 0;
             }
-
-            $totalTax[$resultData['medio_de_pago']]['amount'] += parseStringToFloat($resultData['monto']);
+            $totalTax[$resultData['medio_de_pago']]['amount'] += parseStringToNumber($resultData['monto']);
             $totalTax[$resultData['medio_de_pago']]['count']++;
         }
 
         foreach ($totalTax as $keyPaymentMethod => $result) {
-            $averageByPaymenthMethod[$keyPaymentMethod] = parseFloatToString($result['amount'] / $result['count']);
+            $averageByPaymenthMethod[$keyPaymentMethod] = parseNumberToString($result['amount'] / $result['count']);
         }
 
         return $averageByPaymenthMethod;

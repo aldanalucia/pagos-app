@@ -34,7 +34,7 @@ class GaliciaFile extends File {
     private function setDataFormat(&$dataProcessed): void {
 
         $dataProcessed['nro_transaccion'] = $dataProcessed['nro_transaccion'] ?? 'N/A';
-        $dataProcessed['monto'] = parseFloatToString($dataProcessed['monto'] / 100);
+        $dataProcessed['monto'] = parseNumberToString($dataProcessed['monto']);
         $dataProcessed['identificador'] = $dataProcessed['identificador'] ?? 'N/A';
         $dataProcessed['fecha_pago'] = !is_null($dataProcessed['fecha_pago']) ? convertDateFromString($dataProcessed['fecha_pago']) : 'N/A';
 

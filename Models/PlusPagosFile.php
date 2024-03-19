@@ -33,7 +33,7 @@ class PlusPagosFile extends File {
     private function setDataFormat(&$dataProcessed): void {
 
         $dataProcessed['nro_transaccion'] = !is_null($dataProcessed['nro_transaccion']) ? str_pad($dataProcessed['nro_transaccion'], 15, 0, STR_PAD_LEFT) : 'N/A';
-        $dataProcessed['monto'] = parseFloatToString($dataProcessed['monto'] / 100);
+        $dataProcessed['monto'] = parseNumberToString($dataProcessed['monto']);
         $dataProcessed['identificador'] = !is_null($dataProcessed['identificador']) ? str_pad($dataProcessed['identificador'], 19, 0, STR_PAD_LEFT) : 'N/A';
         $dataProcessed['fecha_pago'] = !is_null($dataProcessed['fecha_pago']) ? convertDateFromString($dataProcessed['fecha_pago']) : 'N/A';
 
