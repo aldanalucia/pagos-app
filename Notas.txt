@@ -1,0 +1,130 @@
+Nomenclatura
+    REND.{COB/REV}-{COB/REV}{tipo_prestacion}-{fecha_generacion}.txt
+
+REND.COB, REND.DEV
+- HEADER: 00008496D20191126LBANCO
+
+0000:       tipo de registro        (4)
+8496:       tipo de prestación      (4)
+D:          servicio (D = débito)   (1)
+20191126:   fecha generación        (8)
+L:          identificación archivo  (1)
+BANCO:      origen                  (7)
+...:        importe total           (14)
+...:        cantidad registros      (7)
+...:        libre                   (304)
+
+- REGISTRO: 03600000000001526178280   030300086000200030894200170000000341375082019112200000000040200000000000000000000000000000000000000000000000R13                                                               0000000000000000000000                                                              mutual 9  201911220000000000000000000000mutual 9
+
+0360:                       tipo de registro            (4)
+00000000001526178280:       id. del cliente             (<= 22)
+03030008600020003089420017: CBU                         (26)
+000000034137508:            ref. unívoca                (15)
+20191122:                   fecha 1er vto.              (8)
+00000000040200:             importe 1er vto             (14, 12 int, 2 float)
+00000000:                   fecha 2do vto               (8)
+00000000000000:             importe 2do vto             (14, 12 int, 2 float)
+00000000:                   fecha 3er vto               (8)
+00000000000000:             importe 3er vto             (14, 12 int, 2 float)
+0:                          moneda factura              (0 pesos - 1 dólares)
+R13:                        motivo rechazo              (3)
+...:                        tipo documento              (4)
+...:                        nro documento               (11)
+...:                        nueva id cliente            (<= 22)
+...:                        nuevo CBU                   (26)
+00000000000000:             importe min                 (14)
+00000000:                   fecha prox. vencimiento     (8)
+...:                        id. cliente anterior        (22)
+...:                        mensaje ATM                 (40)
+mutual 9  :                 concepto factura            (10)
+20191122:                   fecha de cobro              (8)
+00000000000000:             importe cobrado             (14, 12 int, 2 float)
+00000000:                   fecha acreditamiento        (8)
+mutual 9:                   libre                       (26)
+
+- FOOTER: 99998496D20191126LBANCO  000007147081800043539
+
+9999:           tipo de registro        (4)
+8496:           tipo de prestación      (4)
+D:              servicio (D = débito)   (1)
+20191126:       fecha generación        (8)
+L:              identificación archivo  (1)
+BANCO:          origen                  (7)
+00000714708180: importe total           (14)
+0043539:        cantidad registros      (7)
+...:            libre                   (304)
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+Nomenclatura (archivo de Rendición)
+    888ENTES5723_308.txt.2021
+
+888ENTES
+
+- HEADER: HEADER888202103082021030921068
+
+- REGISTRO: DATOS   0888R01666000000900014470000000014073434A3000057247385930008         00000085000000000000000000000000008448000  1012703310000000000000000000000000000000000073859300086012731032700000007                               210306 0000000000000000000000                  00000000
+
+
+DATOS:                              Datos + Relleno(3) ,    (8)
+0888:                               Código ante BCRA ,      (4)
+R:                                  R ,                     (1)
+01666:                              Código Terminal ,       (5)
+0000009000:                         parsubcod ,             (10)
+1447:                               cod boca                (4)
+00000000:                           nro secuencia ,         (8)
+14073434:                           transaccion ,           (8)
+A3:                                 cod operacion ,         (2)
+00:                                 relleno ,               (2)
+00:                                 relleno ,               (2)
+5724:                               cod ente                (4)
+7385930008:                         cod servicio id ,       (19)
+00000085000:                        importe ,               (11)
+00000000000:                        relleno ,               (11)
+00000000000:                        relleno ,               (11)
+0:                                  moneda ,                (1)
+8448:                               cod cajero ,            (4)
+000:                                relleno ,               (3)
+..:                                 relleno ,               (2)
+101:                                cod seguridad ,         (3)
+270331:                             relleno o 1er fecha vto,(6)
+000000:                             relleno ,               (6)
+000:                                bco cheque ,            (3)
+000:                                sucursal                (3)
+0000:                               cod postal ,            (4)
+00000000:                           nro cheque ,            (8)
+00000000:                           nro cuenta ,            (8)
+000:                                plazo ,                 (3)
+73859300086012731032700000007:      cod barra ,             (60)
+210306:                             fecha pago ,            (6)
+..:                                 modo pago ,             (1)
+0000000:                            relleno ,               (7)
+000000000:                          relleno ,               (9)
+00:                                 forma pago ,            (2)
+0000:                               relleno ,               (4)
+...:                                relleno ,               (3)
+...:                                autorizacion relleno ,  (15)
+00000000:                           relleno ,               (8)
+
+
+
+- FOOTER: TRAILER00000047000000862282700000045
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+1 - Cada procesador de archivos debe tener instrucciones definidas comunes a fin de ser reutilizables.
+
+2 - Mostrar los resultados interpretados en una tabla mostrando solo nro de transacción, monto, identificador,
+    fecha de pago, medio de pago
+
+    Nro. transacción    -> ref. unívoca
+    Monto               -> importe 1er vto + moneda factura
+    Identificador       -> id. del cliente ?
+    Fecha de pago       -> fecha de cobro
+    Medio de pago       -> servicio ?
+
+3 - Una vez interpretados los archivos el programa debe informar el total de registros cobrados, monto total de la
+    cobranza y el valor promedio por transacción por medio de pago procesado.
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
